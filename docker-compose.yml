@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  api:
+    build: ./api
+    container_name: api
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api:/usr/src/app:rw  
+    working_dir: /usr/src/app
+    environment:
+      - PYTHONUNBUFFERED=1
+  
+  user_interface:
+    build: ./user_interface
+    container_name: user_interface
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    volumes:
+      - ./user_interface:/usr/src/app:rw  
+    working_dir: /usr/src/app
+    command: npm start  
