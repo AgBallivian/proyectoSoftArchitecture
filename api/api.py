@@ -4,8 +4,32 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app) 
 
-@app.route('/upload-model', methods=['POST'])
+@app.route('/choose-model', methods=['POST'])
 def upload_model():
+    avialable_models = ["simple_nn"]
+    #desplegar modelos disponibles
+    model_data = request.json.get('model_data')
+    if model_data:
+        print("Model uploaded")
+        return jsonify({"status": "Model uploaded successfully"}), 200
+    
+    return jsonify({"error": "No model data provided"}), 400
+
+@app.route('/choose-hardware-simulation', methods=['POST'])
+def upload_model():
+    avialable_models = ["MRAM"]
+    #desplegar tipos de hardware disponibles
+    model_data = request.json.get('model_data')
+    if model_data:
+        print("Model uploaded")
+        return jsonify({"status": "Model uploaded successfully"}), 200
+    
+    return jsonify({"error": "No model data provided"}), 400
+
+@app.route('/choose-optimization', methods=['POST'])
+def upload_model():
+    avialable_models = ["Pruning", "Quantization", "Knowledge Distillation"]
+    #desplegar optimizaciones disponibles
     model_data = request.json.get('model_data')
     if model_data:
         print("Model uploaded")
