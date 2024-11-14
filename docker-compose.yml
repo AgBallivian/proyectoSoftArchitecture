@@ -7,11 +7,11 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./api:/usr/src/app:rw  
+      - ./api:/usr/src/app:rw
     working_dir: /usr/src/app
     environment:
       - PYTHONUNBUFFERED=1
-  
+
   user_interface:
     build: ./user_interface
     container_name: user_interface
@@ -19,7 +19,3 @@ services:
       - "3000:3000"
     depends_on:
       - api
-    volumes:
-      - ./user_interface:/usr/src/app:rw  
-    working_dir: /usr/src/app
-    command: npm start  
