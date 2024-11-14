@@ -1,0 +1,6 @@
+{
+    "models": ["simple_nn"],
+    "hardware": ["RRAM"],
+    "optimizations": ["Pruning", "Quantization", "Knowledge Distillation"]
+  }
+  
