@@ -17,7 +17,7 @@ def upload_model():
 
 @app.route('/choose-hardware-simulation', methods=['POST'])
 def upload_model():
-    avialable_models = ["MRAM"]
+    hardware_types = ["RRAM"]
     #desplegar tipos de hardware disponibles
     model_data = request.json.get('model_data')
     if model_data:
@@ -28,7 +28,7 @@ def upload_model():
 
 @app.route('/choose-optimization', methods=['POST'])
 def upload_model():
-    avialable_models = ["Pruning", "Quantization", "Knowledge Distillation"]
+    optimization_models = ["Pruning", "Quantization", "Knowledge Distillation"]
     #desplegar optimizaciones disponibles
     model_data = request.json.get('model_data')
     if model_data:
