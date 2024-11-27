@@ -24,13 +24,15 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y docker-compose
 
-    # Build the Docker image
-    - name: Build Docker Image
-      run: docker build -t proyectosoftarchitecture-api .
+    # Log in to Heroku container registry
+    - name: Log in to Heroku
+      run: heroku container:login
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
-    # Tag the image for Heroku
-    - name: Tag Image for Heroku
-      run: docker tag proyectosoftarchitecture-api:latest registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
+    # Build the Docker image for the frontend
+    - name: Build Docker Image
+      run: docker build -t registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web ./user_interface
 
     # Push the image to Heroku
     - name: Push to Heroku
@@ -38,7 +40,6 @@ jobs:
 
     # Release the image on Heroku
     - name: Release Heroku App
+      run: heroku container:release web --app ${{ secrets.HEROKU_APP_NAME }}
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:release web --app ${{ secrets.HEROKU_APP_NAME }}
-
